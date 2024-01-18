@@ -3,9 +3,10 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
 	"os"
+
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 )
 
 var db *sql.DB // kansje bad practise, men lettest
@@ -39,7 +40,7 @@ type Item struct {
 	Count int    `json:"count"`
 }
 
-func getItems() []Item {
+func GetItems() []Item {
 	if db == nil {
 		fmt.Println("Database connection is not established.")
 	}

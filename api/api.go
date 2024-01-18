@@ -1,13 +1,13 @@
 package main
 
 import (
-	"net/http"
 	"encoding/json"
-	//	"github.com/gorilla/mux"
+	"net/http"
+	// "github.com/gorilla/mux"
 )
 
 func getItemsHandler(w http.ResponseWriter, r *http.Request) {
-	items := getItems()
+	items := GetItems()
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 

@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"net/http"
-	// "github.com/gorilla/mux"
 )
 
 func getItemsHandler(w http.ResponseWriter, r *http.Request) {

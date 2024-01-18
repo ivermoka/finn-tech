@@ -40,7 +40,7 @@ type Item struct {
 	Count int    `json:"count"`
 }
 
-func GetItems() []Item {
+func getItems() []Item {
 	if db == nil {
 		fmt.Println("Database connection is not established.")
 	}

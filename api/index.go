@@ -7,7 +7,7 @@ import (
 )
 
 func getItemsHandler(w http.ResponseWriter, r *http.Request) {
-	items := GetItems()
+	items := getItems()
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 

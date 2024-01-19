@@ -7,7 +7,7 @@ function App() {
   const [lastUpdated, setLastUpdated] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/items")
+    fetch("/api/items")
       .then((response) => response.json())
       .then((data) => setItems(data))
       .catch((error) => console.log("Error fetching data: ", error));

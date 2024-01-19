@@ -4,12 +4,30 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/joho/godotenv"
 	"net/http"
 	"os"
 
-	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
+
+func main() {
+	Connect()
+	http.HandleFunc("/api/items", Handler)
+
+	port := "8080"
+	println("Server is running on port " + port)
+	http.ListenAndServe(":"+port, nil)
+}
+
+func Handler(w http.ResponseWriter, r *http.Request) {
+	items := getItems()
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(items)
+}
 
 var db *sql.DB // kansje bad practise, men lettest
 
@@ -68,12 +86,4 @@ func getItems() []Item {
 		return nil
 	}
 	return items
-}
-func Handler(w http.ResponseWriter, r *http.Request) {
-	items := getItems()
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(items)
 }

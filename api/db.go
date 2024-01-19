@@ -1,8 +1,10 @@
-package main
+package handler
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -66,4 +68,12 @@ func getItems() []Item {
 		return nil
 	}
 	return items
+}
+func Handler(w http.ResponseWriter, r *http.Request) {
+	items := getItems()
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(items)
 }

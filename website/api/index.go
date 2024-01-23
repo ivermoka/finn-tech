@@ -10,6 +10,7 @@ import (
 	"github.com/joho/godotenv"
 
 	_ "github.com/lib/pq"
+	. "github.com/tbxark/g4vercel"
 )
 
 // func main() {
@@ -60,20 +61,20 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	if r.URL.Path != "/api/items" || r.Method != "GET" {
-		http.Error(w, "404 not found.", http.StatusNotFound)
-		return
-	}
-	items := getItems()
+	server := New()
 
-	w.Header().Set("Content-Type", "application/json")
-    jsonItems, err := json.Marshal(items)
-    if err != nil {
-        http.Error(w, fmt.Sprintf("Error encoding JSON: %v", err), http.StatusInternalServerError)
-        return
-    }
-    w.Write(jsonItems)
-	return
+	server.GET("/api/items", func(context *Context) {
+		items := getItems()
+		jsonItems, err := json.Marshal(items)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error encoding JSON: %v", err), http.StatusInternalServerError)
+			return
+		}
+		context.JSON(200, H {
+			"data": jsonItems,
+		})
+	})
+	server.Handle(w, r)
 }
 
 

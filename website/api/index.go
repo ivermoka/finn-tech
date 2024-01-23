@@ -67,6 +67,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	server.GET("/items", func(context *Context) {
 		items := getItems()
 		jsonItems, err := json.Marshal(items)
+		fmt.Println(jsonItems)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error encoding JSON: %v", err), http.StatusInternalServerError)
 			return

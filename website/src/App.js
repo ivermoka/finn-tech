@@ -13,7 +13,7 @@ function App() {
       },
     })
       .then((response) => response.json().then(console.log(response)))
-      .then((data) => setItems(data.data))
+      .then((data) => setItems(data))
       .catch((error) => console.log("Error fetching data: ", error, items));
   }
   useEffect(() => {

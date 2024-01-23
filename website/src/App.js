@@ -12,7 +12,7 @@ function App() {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json())
+      .then((response) => response.json().then(console.log(response)))
       .then((data) => setItems(data.data))
       .catch((error) => console.log("Error fetching data: ", error, items));
   }

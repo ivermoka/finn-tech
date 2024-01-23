@@ -63,7 +63,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 	server := New()
 
-	server.GET("/api/items", func(context *Context) {
+	server.GET("/items", func(context *Context) {
 		items := getItems()
 		jsonItems, err := json.Marshal(items)
 		if err != nil {

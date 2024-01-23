@@ -4,31 +4,23 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"github.com/joho/godotenv"
 	"net/http"
 	"os"
+
+	"github.com/joho/godotenv"
 
 	_ "github.com/lib/pq"
 )
 
-func main() {
-	Connect()
-	http.HandleFunc("/api/items", Handler)
+// func main() {
 
-	port := "8080"
-	println("Server is running on port " + port)
-	http.ListenAndServe(":"+port, nil)
-}
+// 	http.HandleFunc("/api/items", Handler)
 
-func Handler(w http.ResponseWriter, r *http.Request) {
-	main()
-	items := getItems()
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+// 	port := "8080"
+// 	println("Server is running on port " + port)
+// 	http.ListenAndServe(":"+port, nil)
+// }
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(items)
-}
 
 var db *sql.DB // kansje bad practise, men lettest
 
@@ -60,6 +52,25 @@ type Item struct {
 	Tech  string `json:"tech"`
 	Count int    `json:"count"`
 }
+
+func Handler(w http.ResponseWriter, r *http.Request) {
+	Connect()
+	if r.URL.Path != "/api/items" || r.Method != "GET" {
+		http.Error(w, "404 not found.", http.StatusNotFound)
+		return
+	}
+	items := getItems()
+
+	w.Header().Set("Content-Type", "application/json")
+	jsonItems, err := json.Marshal(items)
+	if err != nil {
+		http.Error(w, "Error encoding JSON", http.StatusInternalServerError)
+		return
+	}
+	w.Write(jsonItems)
+	// json.NewEncoder(w).Encode(items)
+}
+
 
 func getItems() []Item {
 	if db == nil {

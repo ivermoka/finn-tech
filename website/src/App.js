@@ -10,7 +10,7 @@ function App() {
     fetch("/api/items")
       .then((response) => response.json())
       .then((data) => setItems(data))
-      .catch((error) => console.log("Error fetching data: ", error));
+      .catch((error) => console.log("Error fetching data: ", error, data));
 
     const now = new Date();
     const noon = new Date();

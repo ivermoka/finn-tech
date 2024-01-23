@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import BarChart from "./BarChart";
 
 function App() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(null);
   const [lastUpdated, setLastUpdated] = useState("");
   async function fetchItems() {
     await fetch("/items", {
@@ -12,7 +12,7 @@ function App() {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json().then(console.log(response.data)))
+      .then((response) => response.json().then(console.log(response)))
       .then((data) => setItems(data.data))
       .catch((error) => console.log("Error fetching data: ", error, items));
   }

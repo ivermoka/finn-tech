@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import BarChart from "./BarChart";
 
 function App() {
-  const [items, setItems] = useState(null);
+  const [items, setItems] = useState([]);
   const [lastUpdated, setLastUpdated] = useState("");
   async function fetchItems() {
     await fetch("/items", {

@@ -51,9 +51,9 @@ func Connect() error {
 
 
 type Item struct {
-	ID    int    `json:"id"`
-	Tech  string `json:"tech"`
-	Count int    `json:"count"`
+	ID    int    
+	Tech  string 
+	Count int   
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {

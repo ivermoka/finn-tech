@@ -1,4 +1,4 @@
-package api
+package handler
 
 import (
 	"database/sql"
@@ -30,22 +30,24 @@ func init() {
 	}
 }
 
-func Connect() {
-	connStr := fmt.Sprintf("postgresql://%s:%s@ep-twilight-cell-35826753.eu-central-1.aws.neon.tech/job-scraper?sslmode=require", os.Getenv("NEONUSER"), os.Getenv("NEONPASS"))
-	fmt.Println("Connection String:", connStr)
-	var err error
-	db, err = sql.Open("postgres", connStr)
-	if err != nil {
-		panic(err)
-	}
+func Connect() error {
+    connStr := fmt.Sprintf("postgresql://%s:%s@ep-twilight-cell-35826753.eu-central-1.aws.neon.tech/job-scraper?sslmode=require", os.Getenv("NEONUSER"), os.Getenv("NEONPASS"))
+    fmt.Println("Connection String:", connStr)
+    var err error
+    db, err = sql.Open("postgres", connStr)
+    if err != nil {
+        return fmt.Errorf("failed to open database connection: %v", err)
+    }
 
-	var version string
-	if err := db.QueryRow("select version()").Scan(&version); err != nil {
-		panic(err)
-	}
+    var version string
+    if err := db.QueryRow("select version()").Scan(&version); err != nil {
+        return fmt.Errorf("failed to query database version: %v", err)
+    }
 
-	fmt.Printf("version=%s\n", version)
+    fmt.Printf("version=%s\n", version)
+    return nil
 }
+
 
 type Item struct {
 	ID    int    `json:"id"`
@@ -54,7 +56,10 @@ type Item struct {
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	Connect()
+	err := Connect()
+	if err != nil {
+		fmt.Println(err)
+	}
 	if r.URL.Path != "/api/items" || r.Method != "GET" {
 		http.Error(w, "404 not found.", http.StatusNotFound)
 		return
@@ -62,13 +67,13 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	items := getItems()
 
 	w.Header().Set("Content-Type", "application/json")
-	jsonItems, err := json.Marshal(items)
-	if err != nil {
-		http.Error(w, "Error encoding JSON", http.StatusInternalServerError)
-		return
-	}
-	w.Write(jsonItems)
-	// json.NewEncoder(w).Encode(items)
+    jsonItems, err := json.Marshal(items)
+    if err != nil {
+        http.Error(w, fmt.Sprintf("Error encoding JSON: %v", err), http.StatusInternalServerError)
+        return
+    }
+    w.Write(jsonItems)
+	return
 }
 
 

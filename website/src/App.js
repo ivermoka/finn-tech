@@ -5,13 +5,19 @@ import BarChart from "./BarChart";
 function App() {
   const [items, setItems] = useState([]);
   const [lastUpdated, setLastUpdated] = useState("");
-
-  useEffect(() => {
-    fetch("/api/items")
+  async function fetchItems() {
+    await fetch("/api/items", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setItems(data))
       .catch((error) => console.log("Error fetching data: ", error, items));
-
+  }
+  useEffect(() => {
+    fetchItems();
     const now = new Date();
     const noon = new Date();
     noon.setHours(12, 0, 0, 0);

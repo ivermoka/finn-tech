@@ -4,7 +4,14 @@
     {
       "src": "api/*.go",
       "use": "@now/go"
+    },
+    {
+      "src": "src/**/*",
+      "use": "@now/static"
     }
   ],
-  "routes": [{ "src": "/api/items", "dest": "/api/items" }]
+  "routes": [
+    { "src": "/api/items", "dest": "/api/items" },
+    { "src": "/(.*)", "dest": "/src/$1" }
+  ]
 }

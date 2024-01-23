@@ -62,6 +62,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 	server := New()
+	w.Header().Set("Content-Type", "application/json")
 
 	server.GET("/items", func(context *Context) {
 		items := getItems()

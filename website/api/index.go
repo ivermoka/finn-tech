@@ -18,13 +18,17 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	items := getItems()
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-
 	w.Header().Set("Content-Type", "application/json")
+	
 	jsonItems, err := json.Marshal(items)
 	if err != nil {
-		fmt.Println(jsonItems)
+		log.Printf("Error encoding JSON: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
-	w.Write(jsonItems)
+	if _, err := w.Write(jsonItems); err != nil {
+		log.Printf("Error writing response: %v", err)
+	}
 }
 
 var db *sql.DB // kansje bad practise, men lettest

@@ -17,7 +17,7 @@ export async function fetchItems() {
 
     const data = await response.json();
     console.log("Fetched data:", data);
-    return "data";
+    return data;
   } catch (error) {
     console.error("Error fetching data:", error);
     return null;

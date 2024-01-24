@@ -35,7 +35,7 @@ var db *sql.DB // kansje bad practise, men lettest
 
 func init() {
 	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file", err)
+		log.Fatal("Error loading .env file", err, os.Getenv("NEONUSER"), os.Getenv("NEONPASS"))
 	}
 }
 func Connect() error {

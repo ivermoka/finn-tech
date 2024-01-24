@@ -12,6 +12,7 @@ function App() {
     const fetchData = async () => {
       try {
         const data = await fetchItems();
+        console.log("DATA: data");
         if (data !== null) {
           console.log("items", data);
           setItems(data);

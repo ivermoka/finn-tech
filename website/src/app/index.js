@@ -2,12 +2,15 @@
 
 export async function fetchItems() {
   try {
-    const response = await fetch("/api", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://wanted-tech-site-6esd.vercel.app/api",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status} - ${response.statusText}`);

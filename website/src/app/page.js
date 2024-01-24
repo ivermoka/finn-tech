@@ -2,24 +2,14 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import BarChart from "./BarChart";
+import fetchItems from "./api/index";
 
 function App() {
   const [items, setItems] = useState([]);
   const [lastUpdated, setLastUpdated] = useState("");
-  async function fetchItems() {
-    "use server";
-    await fetch("/api/items", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json().then(console.log(response)))
-      .then((data) => setItems(data))
-      .catch((error) => console.log("Error fetching data: ", error, items));
-  }
+
   useEffect(() => {
-    fetchItems();
+    fetchItems().then((items) => setItems(items));
     const now = new Date();
     const noon = new Date();
     noon.setHours(12, 0, 0, 0);

@@ -1,6 +1,6 @@
 "use server";
 
-async function fetchItems() {
+export async function fetchItems() {
   const items = [];
   await fetch("/api", {
     method: "GET",
@@ -14,4 +14,3 @@ async function fetchItems() {
   console.log(items);
   return items;
 }
-export default fetchItems;

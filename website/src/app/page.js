@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import BarChart from "./BarChart";
-import fetchItems from "./index";
+import { fetchItems } from ".";
 import "./globals.css";
 
 function App() {

@@ -13,19 +13,8 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func main() {
-	err := Connect()
-	if err != nil {
-		fmt.Println(err)
-	}
-	http.HandleFunc("/api", Handler)
-
-	port := "8080"
-	println("Server is running on port " + port)
-	http.ListenAndServe(":"+port, nil)
-}
-
 func Handler(w http.ResponseWriter, r *http.Request) {
+	Connect()
 	items := getItems()
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")

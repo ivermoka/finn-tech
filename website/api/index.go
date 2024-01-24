@@ -13,7 +13,10 @@ import (
 )
 
 func main() {
-	Connect()
+	err := Connect()
+	if err != nil {
+		fmt.Println(err)
+	}
 	http.HandleFunc("/api/items", Handler)
 
 	port := "8080"
@@ -22,7 +25,6 @@ func main() {
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	main()
 	items := getItems()
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
@@ -38,22 +40,22 @@ func init() {
 		fmt.Println("Error loading .env file")
 	}
 }
+func Connect() error {
+    connStr := fmt.Sprintf("postgresql://%s:%s@ep-twilight-cell-35826753.eu-central-1.aws.neon.tech/job-scraper?sslmode=require", os.Getenv("NEONUSER"), os.Getenv("NEONPASS"))
+    fmt.Println("Connection String:", connStr)
+    var err error
+    db, err = sql.Open("postgres", connStr)
+    if err != nil {
+        return fmt.Errorf("failed to open database connection: %v", err)
+    }
 
-func Connect() {
-	connStr := fmt.Sprintf("postgresql://%s:%s@ep-twilight-cell-35826753.eu-central-1.aws.neon.tech/job-scraper?sslmode=require", os.Getenv("NEONUSER"), os.Getenv("NEONPASS"))
-	fmt.Println("Connection String:", connStr)
-	var err error
-	db, err = sql.Open("postgres", connStr)
-	if err != nil {
-		panic(err)
-	}
+    var version string
+    if err := db.QueryRow("select version()").Scan(&version); err != nil {
+        return fmt.Errorf("failed to query database version: %v", err)
+    }
 
-	var version string
-	if err := db.QueryRow("select version()").Scan(&version); err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("version=%s\n", version)
+    fmt.Printf("version=%s\n", version)
+    return nil
 }
 
 type Item struct {

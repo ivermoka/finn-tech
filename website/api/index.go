@@ -66,6 +66,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	server.GET("/items", func(context *Context) {
 		items := getItems()
+		fmt.Println(items)
 		jsonItems, err := json.Marshal(items)
 		fmt.Println(jsonItems)
 		if err != nil {
@@ -105,5 +106,6 @@ func getItems() []Item {
 		fmt.Println("Error iterating over rows:", err)
 		return nil
 	}
+	fmt.Println(items)
 	return items
 }

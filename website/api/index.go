@@ -8,8 +8,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/joho/godotenv"
-
 	_ "github.com/lib/pq"
 )
 
@@ -33,11 +31,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 var db *sql.DB // kansje bad practise, men lettest
 
-func init() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file", err, os.Getenv("NEONUSER"), os.Getenv("NEONPASS"))
-	}
-}
+// func init() { // gir error, men får fortsatt til å hente ut data fra .env???
+// 	if err := godotenv.Load(); err != nil {
+// 		log.Fatal("Error loading .env file", err, os.Getenv("NEONUSER"), os.Getenv("NEONPASS"))
+// 	}
+// }
 func Connect() error {
     connStr := fmt.Sprintf("postgresql://%s:%s@ep-twilight-cell-35826753.eu-central-1.aws.neon.tech/job-scraper?sslmode=require", os.Getenv("NEONUSER"), os.Getenv("NEONPASS"))
     fmt.Println("Connection String:", connStr)

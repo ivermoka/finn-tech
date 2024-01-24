@@ -17,7 +17,7 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	http.HandleFunc("/api/items", Handler)
+	http.HandleFunc("/api", Handler)
 
 	port := "8080"
 	println("Server is running on port " + port)
@@ -30,7 +30,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(items)
+	jsonItems, err := json.Marshal(items)
+	if err != nil {
+		fmt.Println(jsonItems)
+	}
+	w.Write(jsonItems)
 }
 
 var db *sql.DB // kansje bad practise, men lettest

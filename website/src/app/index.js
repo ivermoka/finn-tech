@@ -2,7 +2,7 @@
 
 async function fetchItems() {
   const items = [];
-  await fetch("/api/items", {
+  await fetch("/api", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

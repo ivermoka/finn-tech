@@ -30,10 +30,12 @@ async function fetchItems() {
 function App() {
   const [items, setItems] = useState([]);
   const [lastUpdated, setLastUpdated] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       const data = await fetchItems();
+      setLoading(false);
       setItems(data);
     }
     fetchData();
@@ -55,7 +57,7 @@ function App() {
       <nav>
         <div className="socials">
           <a href="https://github.com/ivermoka">
-            <img src="github-icon.png" alt="brand" className="nav-brand"></img>
+            <img src="/github-icon.png" alt="brand" className="nav-brand"></img>
           </a>
         </div>
 
@@ -67,11 +69,10 @@ function App() {
       <div className="title">
         <span>De mest ettertraktede jobbene nå</span>
       </div>
-      {items === null ? (
-        <div>
-          Loading... <br />
-          (If it loads forever, the data might be updating right now. Please
-          wait.
+
+      {loading ? (
+        <div className="loader-container">
+          <div className="loader"></div>
         </div>
       ) : (
         <BarChart data={items} />

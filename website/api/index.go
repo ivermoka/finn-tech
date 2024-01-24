@@ -64,7 +64,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	server := New()
 	w.Header().Set("Content-Type", "application/json")
 
-	server.GET("/items", func(context *Context) {
+	server.GET("/api/items", func(context *Context) {
 		items := getItems()
 		fmt.Println(items)
 		jsonItems, err := json.Marshal(items)

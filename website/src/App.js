@@ -6,7 +6,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [lastUpdated, setLastUpdated] = useState("");
   async function fetchItems() {
-    await fetch("/items", {
+    await fetch("/api/items", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

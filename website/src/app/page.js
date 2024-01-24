@@ -32,22 +32,10 @@ function App() {
   const [lastUpdated, setLastUpdated] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await fetchItems().then((data) => setItems(data));
-        console.log("DATA:", items);
-        // if (data !== null) {
-        //   console.log("items", data);
-        //   setItems(data);
-        // } else {
-        //   console.warn(
-        //     "Data is null. There might be an issue with the fetch operation."
-        //   );
-        // }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    async function fetchData() {
+      const data = await fetchItems();
+      setItems(data);
+    }
     fetchData();
     const now = new Date();
     const noon = new Date();

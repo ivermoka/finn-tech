@@ -9,8 +9,19 @@ function App() {
   const [lastUpdated, setLastUpdated] = useState("");
 
   useEffect(() => {
-    fetchItems().then((items) => setItems(items));
-    console.log("items", items);
+    fetchItems()
+      .then((data) => {
+        if (data !== null) {
+          console.log(data);
+          setItems(data);
+        } else {
+          console.warn(
+            "Data is null. There might be an issue with the fetch operation."
+          );
+        }
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+
     const now = new Date();
     const noon = new Date();
     noon.setHours(12, 0, 0, 0);

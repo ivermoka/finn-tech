@@ -1,16 +1,23 @@
 "use server";
 
 export async function fetchItems() {
-  const items = [];
-  await fetch("/api", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json().then(console.log(response)))
-    .then((data) => items.push(data))
-    .catch((error) => console.log("Error fetching data: ", error, items));
-  console.log(items);
-  return items;
+  try {
+    const response = await fetch("/api", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log("Fetched data:", data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
 }

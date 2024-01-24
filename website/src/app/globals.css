@@ -7,7 +7,7 @@
 
 body {
   background-color: rgb(15, 15, 15);
-  color: rgb(57, 76, 110);
+  color: rgb(103, 123, 161);
   font-family: "Arial", sans-serif;
 }
 
@@ -55,7 +55,7 @@ nav {
 }
 
 .loader {
-  border: 10px solid rgb(57, 76, 110, 0.8);
+  border: 10px solid rgb(103, 123, 161, 0.8);
   border-top: 10px solid rgb(57, 76, 110);
   border-radius: 50%;
   width: 80px;

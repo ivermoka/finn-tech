@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
@@ -41,7 +42,7 @@ var db *sql.DB // kansje bad practise, men lettest
 
 func init() {
 	if err := godotenv.Load(); err != nil {
-		fmt.Println("Error loading .env file")
+		log.Fatal("Error loading .env file", err)
 	}
 }
 func Connect() error {

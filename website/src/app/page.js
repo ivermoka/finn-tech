@@ -10,6 +10,7 @@ function App() {
 
   useEffect(() => {
     fetchItems().then((items) => setItems(items));
+    console.log("items", items);
     const now = new Date();
     const noon = new Date();
     noon.setHours(12, 0, 0, 0);

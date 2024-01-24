@@ -1,8 +1,8 @@
 "use client";
-import "./global.css";
 import React, { useState, useEffect } from "react";
 import BarChart from "./BarChart";
-import fetchItems from "@./api/index.js";
+import fetchItems from "./index";
+import "./globals.css";
 
 function App() {
   const [items, setItems] = useState([]);

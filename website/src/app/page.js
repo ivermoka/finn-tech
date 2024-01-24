@@ -9,19 +9,22 @@ function App() {
   const [lastUpdated, setLastUpdated] = useState("");
 
   useEffect(() => {
-    fetchItems()
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchItems();
         if (data !== null) {
-          console.log(data);
+          console.log("items", data);
           setItems(data);
         } else {
           console.warn(
             "Data is null. There might be an issue with the fetch operation."
           );
         }
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
     const now = new Date();
     const noon = new Date();
     noon.setHours(12, 0, 0, 0);

@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchItems();
+        await fetchItems().then((data) => setItems(data));
         console.log("DATA:", data);
         if (data !== null) {
           console.log("items", data);

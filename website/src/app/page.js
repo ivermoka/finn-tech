@@ -12,15 +12,15 @@ function App() {
     const fetchData = async () => {
       try {
         await fetchItems().then((data) => setItems(data));
-        console.log("DATA:", data);
-        if (data !== null) {
-          console.log("items", data);
-          setItems(data);
-        } else {
-          console.warn(
-            "Data is null. There might be an issue with the fetch operation."
-          );
-        }
+        console.log("DATA:", items);
+        // if (data !== null) {
+        //   console.log("items", data);
+        //   setItems(data);
+        // } else {
+        //   console.warn(
+        //     "Data is null. There might be an issue with the fetch operation."
+        //   );
+        // }
       } catch (error) {
         console.error("Error fetching data:", error);
       }

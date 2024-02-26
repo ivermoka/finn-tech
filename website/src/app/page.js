@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import BarChart from "./BarChart";
 import "./globals.css";
 import { FaSearch } from "react-icons/fa";
+import TimeSinceLastUpdate from "./TimeSinceLastUpdate";
 
 async function fetchItems() {
   try {
@@ -30,36 +31,15 @@ async function fetchItems() {
 
 function App() {
   const [items, setItems] = useState([]);
-  const [lastUpdated, setLastUpdated] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchItems()
-        .then(setLoading(false))
-        .then(setItems(data));
+      const data = await fetchItems();
+      setLoading(false);
+      setItems(data);
     }
     fetchData();
-    const now = new Date();
-    const noon = new Date();
-    noon.setHours(12, 0, 0, 0);
-
-    let elapsedMilliseconds = now - noon;
-
-    const isPastNoon = elapsedMilliseconds >= 0;
-
-    if (!isPastNoon) {
-      elapsedMilliseconds = noon - now;
-    }
-
-    const elapsedHours = Math.floor(elapsedMilliseconds / 3600000);
-    const elapsedMinutes = Math.floor((elapsedMilliseconds % 3600000) / 60000);
-
-    const timeSinceNoon = `${
-      isPastNoon ? "" : "-"
-    }${elapsedHours} timer og ${elapsedMinutes} minutter siden`;
-
-    setLastUpdated(timeSinceNoon);
   }, []);
 
   return (
@@ -72,10 +52,7 @@ function App() {
           <FaSearch style={{ paddingLeft: "20px", fontSize: "50px" }} />
         </div>
 
-        <div>
-          Sist oppdatert:
-          {lastUpdated}
-        </div>
+        <TimeSinceLastUpdate />
       </nav>
       <div className="title">
         <span>De mest ettertraktede jobbene nå</span>

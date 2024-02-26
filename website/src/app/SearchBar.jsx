@@ -6,9 +6,12 @@ const SearchBar = ({ data }) => {
   const [showResults, setShowResults] = useState(false);
 
   const handleSearch = (searchTerm) => {
-    const filteredResults = data.filter((item) =>
-      item.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredResults = data.filter((item) => {
+      if (typeof item.tech === "string") {
+        return item.tech.toLowerCase().includes(searchTerm.toLowerCase());
+      }
+      return false;
+    });
     setSearchResults(filteredResults);
   };
 

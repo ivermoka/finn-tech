@@ -74,7 +74,7 @@ nav {
 #search {
   padding: 10px;
   background-color: rgb(76, 98, 143);
-  border-radius: 180px;
+  border-radius: 160px;
   border: none;
   font-size: large;
 }
@@ -82,7 +82,8 @@ nav {
   padding: 10px;
   position: absolute;
   background-color: rgb(76, 98, 143);
-  border-radius: 180px;
+  border-radius: 10px;
   border: none;
-  font-size: large;
+  color: black;
+  font-size: medium;
 }

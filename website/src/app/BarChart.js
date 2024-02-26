@@ -41,7 +41,7 @@ const BarChart = ({ data }) => {
     });
   }, [data]);
 
-  return <canvas ref={chartRef} width="400" height="200" />;
+  return <canvas ref={chartRef} width="400" height="150" />;
 };
 
 export default BarChart;

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import BarChart from "./BarChart";
 import "./globals.css";
+import { FaSearch } from "react-icons/fa";
 
 async function fetchItems() {
   try {
@@ -34,22 +35,31 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchItems();
-      setLoading(false);
-      setItems(data);
+      const data = await fetchItems()
+        .then(setLoading(false))
+        .then(setItems(data));
     }
     fetchData();
     const now = new Date();
     const noon = new Date();
     noon.setHours(12, 0, 0, 0);
 
-    const elapsedMilliseconds = now - noon;
-    const elapsedHours = Math.floor(elapsedMilliseconds / 3600000); // 1 hour = 3600000 milliseconds
-    const elapsedMinutes = Math.floor((elapsedMilliseconds % 3600000) / 60000); // 1 minute = 60000 milliseconds
+    let elapsedMilliseconds = now - noon;
 
-    setLastUpdated(
-      ` ${elapsedHours} timer og ${elapsedMinutes} minutter siden`
-    );
+    const isPastNoon = elapsedMilliseconds >= 0;
+
+    if (!isPastNoon) {
+      elapsedMilliseconds = noon - now;
+    }
+
+    const elapsedHours = Math.floor(elapsedMilliseconds / 3600000);
+    const elapsedMinutes = Math.floor((elapsedMilliseconds % 3600000) / 60000);
+
+    const timeSinceNoon = `${
+      isPastNoon ? "" : "-"
+    }${elapsedHours} timer og ${elapsedMinutes} minutter siden`;
+
+    setLastUpdated(timeSinceNoon);
   }, []);
 
   return (
@@ -59,6 +69,7 @@ function App() {
           <a href="https://github.com/ivermoka">
             <img src="/github-icon.png" alt="brand" className="nav-brand"></img>
           </a>
+          <FaSearch style={{ paddingLeft: "20px", fontSize: "50px" }} />
         </div>
 
         <div>

@@ -70,3 +70,19 @@ nav {
     transform: rotate(360deg);
   }
 }
+
+#search {
+  padding: 10px;
+  background-color: rgb(76, 98, 143);
+  border-radius: 180px;
+  border: none;
+  font-size: large;
+}
+#results {
+  padding: 10px;
+  position: absolute;
+  background-color: rgb(76, 98, 143);
+  border-radius: 180px;
+  border: none;
+  font-size: large;
+}

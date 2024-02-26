@@ -4,6 +4,7 @@ import BarChart from "./BarChart";
 import "./globals.css";
 import { FaSearch } from "react-icons/fa";
 import TimeSinceLastUpdate from "./TimeSinceLastUpdate";
+import SearchBar from "./SearchBar";
 
 async function fetchItems() {
   try {
@@ -49,7 +50,7 @@ function App() {
           <a href="https://github.com/ivermoka">
             <img src="/github-icon.png" alt="brand" className="nav-brand"></img>
           </a>
-          <FaSearch style={{ paddingLeft: "20px", fontSize: "50px" }} />
+          <SearchBar data={items} />
         </div>
 
         <TimeSinceLastUpdate />

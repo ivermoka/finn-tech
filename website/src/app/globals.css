@@ -4,6 +4,9 @@
   box-sizing: border-box;
   font-weight: bold;
 }
+*:focus {
+  outline: none;
+}
 
 body {
   background-color: rgb(24, 24, 27);
@@ -82,6 +85,7 @@ nav {
 #results {
   padding: 10px;
   position: absolute;
+  z-index: 5;
   border-top: 1px black solid;
   background-color: rgb(180, 181, 183);
   border-radius: 0 0 5px 5px;

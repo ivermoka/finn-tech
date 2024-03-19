@@ -47,6 +47,7 @@ nav {
   align-items: center;
   gap: 10px;
 }
+
 .loader-container {
   display: flex;
   justify-content: center;
@@ -55,13 +56,14 @@ nav {
 }
 
 .loader {
-  border: 10px solid rgb(180, 181, 183, 0.8);
+  border: 10px solid rgba(180, 181, 183, 0.8);
   border-top: 10px solid rgb(76, 98, 143);
   border-radius: 50%;
   width: 80px;
   height: 80px;
   animation: spin 1s linear infinite;
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -78,12 +80,15 @@ nav {
   border: none;
   font-size: large;
 }
+
 #container {
-  position: absolute;
+  position: relative; /* changed to relative */
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-top: 50px; /* added for spacing */
 }
+
 #results {
   padding: 10px;
   background-color: rgb(180, 181, 183);
@@ -92,4 +97,5 @@ nav {
   color: black;
   font-size: medium;
   list-style-type: none;
+  margin-top: 10px; /* added for spacing */
 }

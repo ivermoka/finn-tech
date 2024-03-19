@@ -82,8 +82,10 @@ nav {
 #results {
   padding: 10px;
   position: absolute;
+  border-top: 1px black solid;
   background-color: rgb(180, 181, 183);
-  border-radius: 5px;
+  border-radius: 0 0 5px 5px;
+  margin-top: -5px;
 
   border: none;
   color: black;

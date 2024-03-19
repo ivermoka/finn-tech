@@ -11,6 +11,9 @@ const SearchBar = ({ data }) => {
       }
       return false;
     });
+
+    filteredResults.sort((a, b) => b.count - a.count);
+
     const maxResults = 5;
     const limitedResults = filteredResults.slice(0, maxResults);
 

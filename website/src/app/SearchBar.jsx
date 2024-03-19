@@ -35,8 +35,9 @@ const SearchBar = ({ data }) => {
       {searchTerm !== "" && (
         <ul id="results">
           {searchResults.map((result, index) => (
-            <li key={index}>
-              {result.tech} - Count: {result.count}
+            <li key={index} id="list">
+              <p>{result.tech}</p>
+              <p>{result.count}</p>
             </li>
           ))}
         </ul>

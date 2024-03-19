@@ -26,7 +26,7 @@ const BarChart = ({ data }) => {
           {
             label: "Frekvens",
             data: values,
-            backgroundColor: "rgb(76, 98, 143)",
+            backgroundColor: "rgb(180, 181, 183)",
             borderWidth: 1,
           },
         ],

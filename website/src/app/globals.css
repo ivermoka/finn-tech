@@ -55,7 +55,7 @@ nav {
 }
 
 .loader {
-  border: 10px solid rgb(76, 98, 143, 0.8);
+  border: 10px solid rgb(180, 181, 183, 0.8);
   border-top: 10px solid rgb(76, 98, 143);
   border-radius: 50%;
   width: 80px;
@@ -79,6 +79,7 @@ nav {
   font-size: large;
 }
 #container {
+  position: absolute;
   display: flex;
   justify-content: center;
   flex-direction: column;

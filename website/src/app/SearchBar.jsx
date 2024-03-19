@@ -11,7 +11,10 @@ const SearchBar = ({ data }) => {
       }
       return false;
     });
-    setSearchResults(filteredResults);
+    const maxResults = 5;
+    const limitedResults = filteredResults.slice(0, maxResults);
+
+    setSearchResults(limitedResults);
   };
 
   const handleChange = (event) => {

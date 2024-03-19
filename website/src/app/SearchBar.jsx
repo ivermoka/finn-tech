@@ -21,7 +21,7 @@ const SearchBar = ({ data }) => {
   };
 
   return (
-    <div id="container">
+    <div>
       <input
         type="text"
         placeholder="Search..."

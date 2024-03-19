@@ -78,19 +78,12 @@ nav {
   border: none;
   font-size: large;
 }
-#container {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
 #results {
   padding: 10px;
   position: absolute;
-  background-color: rgb(180, 181, 183);
+  background-color: rgb(76, 98, 143);
   border-radius: 10px;
   border: none;
   color: black;
   font-size: medium;
-  list-style-type: none;
 }

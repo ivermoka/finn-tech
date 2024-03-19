@@ -3,7 +3,6 @@ import React, { useState } from "react";
 const SearchBar = ({ data }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [showResults, setShowResults] = useState(false);
 
   const handleSearch = (searchTerm) => {
     const filteredResults = data.filter((item) => {
@@ -22,16 +21,15 @@ const SearchBar = ({ data }) => {
   };
 
   return (
-    <div>
+    <div id="container">
       <input
         type="text"
         placeholder="Search..."
-        onClick={() => setShowResults(!showResults)}
         value={searchTerm}
         onChange={handleChange}
         id="search"
       />
-      {showResults && (
+      {searchTerm !== "" && (
         <ul id="results">
           {searchResults.map((result, index) => (
             <li key={index}>

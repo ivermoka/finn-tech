@@ -6,8 +6,8 @@
 }
 
 body {
-  background-color: rgb(15, 15, 15);
-  color: rgb(76, 98, 143);
+  background-color: rgb(24, 24, 27);
+  color: rgb(180, 181, 183);
   font-family: "Arial", sans-serif;
 }
 
@@ -73,17 +73,22 @@ nav {
 
 #search {
   padding: 10px;
-  background-color: rgb(76, 98, 143);
-  border-radius: 160px;
+  background-color: rgb(180, 181, 183);
+  border-radius: 5px;
   border: none;
   font-size: large;
 }
+#container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 #results {
   padding: 10px;
-  position: absolute;
-  background-color: rgb(76, 98, 143);
+  background-color: rgb(180, 181, 183);
   border-radius: 10px;
   border: none;
   color: black;
   font-size: medium;
+  list-style-type: none;
 }

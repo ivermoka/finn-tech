@@ -47,7 +47,7 @@ function App() {
     <div>
       <nav>
         <div className="socials">
-          <a href="https://github.com/ivermoka">
+          <a href="https://github.com/ivermoka/finn-tech">
             <img src="/github-icon.png" alt="brand" className="nav-brand"></img>
           </a>
           <SearchBar data={items} />
